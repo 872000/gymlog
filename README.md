@@ -17,7 +17,7 @@ Most workout apps want a subscription and your data on their servers. GymLog is 
 
 - **Exercise library** — 24 bundled exercises grouped by muscle group, plus your own custom exercises (name, muscle group, equipment).
 - **Workout sessions** — start a workout, log sets with quick reps/weight steppers, delete mistakes, finish when done.
-- **Automatic PR detection** — every logged set is checked against your history; new heaviest lifts and best estimated 1RMs get celebrated and stored in a per-exercise PR history.
+- **Automatic PR detection** — every logged set is checked against your history; new heaviest lifts and best estimated 1RMs get celebrated and stored in a per-exercise PR history. Only sets with reps above zero and weight above zero count, and the estimate uses the Epley formula (weight × (1 + reps / 30)); a single-rep set counts as its own weight.
 - **Progress charts** — estimated-1RM trend per exercise and volume-per-day bars, drawn with custom `CustomPainter`s (no chart package, zero network).
 - **History** — every session with its sets, total volume, and timestamps; PR viewer per exercise.
 - **Local-first storage** — `sqflite` on device behind a repository interface; the in-memory implementation powers tests and previews with identical behavior.
