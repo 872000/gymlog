@@ -8,6 +8,9 @@ class PrCalculator {
   const PrCalculator();
 
   /// Epley formula estimate of a one-rep max from a working set.
+  ///
+  /// A single-rep set returns its own weight (no Epley inflation), and a
+  /// zero or negative weight is returned unchanged.
   double e1rm({required double weightKg, required int reps}) {
     if (reps <= 1 || weightKg <= 0) return weightKg;
     return weightKg * (1 + reps / 30);
@@ -15,8 +18,10 @@ class PrCalculator {
 
   /// Compares [newSets] against [history] and returns the fresh PRs they
   /// contain. Two PR types are tracked per exercise: heaviest weight lifted
-  /// and best estimated 1RM. Nothing is persisted here — the caller records
-  /// the returned entries via the repository.
+  /// and best estimated 1RM. A set must strictly beat the previous best to
+  /// count (tying a PR is not a PR), and one set can earn both PR types at
+  /// once. Nothing is persisted here — the caller records the returned
+  /// entries via the repository.
   List<PersonalRecord> detectPrs({
     required String exerciseId,
     required List<WorkoutSet> newSets,
